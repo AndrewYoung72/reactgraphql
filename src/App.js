@@ -35,7 +35,7 @@ function App() {
       <h1 className="text-primary">
         <i className="bi bi-diagram-2-fill"></i> Repos
       </h1>
-      <h2>Hello {userName}</h2>
+      <h2>Hello {userName},  here is your query request. </h2>
       {repoList && (
         <ul className="list-group list-group-flush">
           {repoList.map((repo) => (

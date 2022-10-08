@@ -11,6 +11,7 @@ const githubQuery = {
            description
            id
            url
+           viewerSubscription
          }
        }
      }
@@ -18,4 +19,4 @@ const githubQuery = {
   `,
 };
 
-export  default githubQuery;
+export default githubQuery;
