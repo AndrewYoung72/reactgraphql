@@ -1,10 +1,13 @@
-const githubQuery = {
-  query: `
+const githubQuery = (pageCount, queryString) => {
+  return {
+    query: `
   {
     viewer {
      name
+     avatarUrl
    }
-     search(query: "user:AndrewYoung72 sort:updated-desc", type: REPOSITORY, first: 10) {
+     search(query: "${queryString} user:AndrewYoung72 sort:updated-desc", type: REPOSITORY, first: ${pageCount} {
+      repositoryCount
        nodes {
          ... on Repository {
            name
@@ -12,11 +15,15 @@ const githubQuery = {
            id
            url
            viewerSubscription
+           licenseInfo {
+            spdxId
+           }
          }
        }
      }
    }
   `,
+  };
 };
 
 export default githubQuery;
