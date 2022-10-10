@@ -1,13 +1,12 @@
 const githubQuery = (pageCount, queryString) => {
-  return {
-    query: `
+return {
+  query: `
   {
     viewer {
      name
      avatarUrl
    }
-     search(query: "${queryString} user:AndrewYoung72 sort:updated-desc", type: REPOSITORY, first: ${pageCount} {
-      repositoryCount
+     search(query:  "user:AndrewYoung72 sort:updated-desc", type: REPOSITORY, first: 10) {
        nodes {
          ... on Repository {
            name
@@ -23,7 +22,7 @@ const githubQuery = (pageCount, queryString) => {
      }
    }
   `,
-  };
 };
+}
 
 export default githubQuery;
