@@ -7,9 +7,9 @@ const githubQuery = (pageCount, queryString) => {
         avatarUrl
       }
       search(
-        query: "user:AndrewYoung72 sort:updated-desc"
+        query: "${queryString}user:AndrewYoung72 sort:updated-desc"
         type: REPOSITORY
-        first: 20
+        first: ${pageCount}
       ) {
         repositoryCount
         nodes {

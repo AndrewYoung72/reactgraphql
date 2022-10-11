@@ -1,7 +1,8 @@
 import github from "./db";
 import { useEffect, useState, useCallback } from "react";
-import githubQuery from "./Query";
+import query from "./Query";
 import RepoInfo from "./RepoInfo";
+import SearchBox from "./SearchBox";
 
 function App() {
   let [userName, setUserName] = useState("");
@@ -13,7 +14,7 @@ function App() {
   let [totalCount, setTotalCount] = useState(null);
 
   const fetchData = useCallback(() => {
-    const queryText = JSON.stringify(githubQuery(pageCount, queryString));
+    const queryText = JSON.stringify(query(pageCount, queryString));
 
     fetch(github.baseURL, {
       method: "POST",
@@ -29,8 +30,6 @@ function App() {
         setRepoList(repos);
         setAvatarUrl(viewer.avatarUrl);
         setTotalCount(total);
-        setPageCount(10);
-        console.log(data);
       })
       .catch((err) => {
         console.log(err);
@@ -48,11 +47,8 @@ function App() {
       </h1>
       <h2>
         Hello {userName}, <img src={avatarUrl} alt="Boo"></img>
+        <SearchBox totalCount={totalCount} pageCount={pageCount} queryString={queryString} onQueryChange={(myString) => {setQueryString(myString)}} onTotalChange={(myTotal) => {setPageCount(myTotal)}} />
       </h2>
-      <p>
-        <b> Search for:</b> {queryString} | <b> Items per page:</b> {pageCount}{" "}
-        | <b> Total results:</b> {totalCount} |
-      </p>
       {repoList && (
         <ul className="list-group list-group-flush">
           {repoList.map((repo) => (
